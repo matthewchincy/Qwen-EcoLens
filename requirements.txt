@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+aiomysql
+python-dotenv
+dashscope
+python-telegram-bot
+pydantic-settings
+cryptography
+greenlet
+openai
+oss2
+Pillow

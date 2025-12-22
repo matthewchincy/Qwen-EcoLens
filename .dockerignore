@@ -1,0 +1,15 @@
+# Exclude local env and virtual env
+.env
+.venv
+venv/
+__pycache__/
+*.pyc
+.git/
+.vscode/
+
+# IDE files
+.idea/
+.DS_Store
+
+# Logs
+*.log

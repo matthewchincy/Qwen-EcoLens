@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Python App Service
+  app:
+    build: .
+    container_name: qwen_ecolens_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      # Override DB Host to point to the docker service name
+      - DATABASE_URL=mysql+aiomysql://user:password@db:3306/ecolens
+    restart: on-failure
+
+  # MySQL Database Service
+  db:
+    image: mysql:8.0
+    container_name: qwen_ecolens_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ecolens
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306" # Map to 3307 on host to avoid conflict if local mysql is running
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
