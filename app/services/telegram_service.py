@@ -261,13 +261,14 @@ By using **Qwen-EcoLens**, you agree to these terms.
 
              # 4. Generate
              video_prompt = (
-                f"A cinematic educational video explaining how {last_log.food_name} affects the environment and human health. "
-                f"Show visuals of {last_log.food_name}."
+                f"A cinematic educational video showing {last_log.food_name}. "
+                f"Explain how it affects the environment: "
              )
              if last_log.analysis_json:
                  c = last_log.analysis_json.get('carbon_emission_kg')
                  e = last_log.analysis_json.get('esg_score')
-                 video_prompt += f" It has {c} kg CO2 emissions and an ESG score of {e}/10."
+                 r = last_log.analysis_json.get('reasoning', 'Impact analysis.')
+                 video_prompt += f"{r} It produces {c} kg CO2e with ESG score {e}/10."
 
              video_url = await generate_video(prompt=video_prompt, progress_callback=telegram_progress)
 
